@@ -1,0 +1,40 @@
+{
+  "name": "tip20",
+  "version": "0.0.1",
+  "author": "Hrishi Olickel <twitter-@hrishioa> (https://olickel.com)",
+  "description": "Use prefix completion to extract specific data with streaming",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southbridgeai/tip20.git"
+  },
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.28.0",
+    "@anthropic-ai/tokenizer": "^0.0.4"
+  },
+  "scripts": {
+    "build": "tsup ./src"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "devDependencies": {
+    "@swc/core": "^1.7.26",
+    "@types/bun": "^1.1.10",
+    "@types/node": "^22.7.4",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.2"
+  }
+}

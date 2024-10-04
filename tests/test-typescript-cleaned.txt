@@ -1,0 +1,4 @@
+const stringWithLeadingWhitespace: string = "   Hello, world!";
+const trimmedString: string = stringWithLeadingWhitespace.trimStart();
+
+console.log(trimmedString); // Output: "Hello, world!"

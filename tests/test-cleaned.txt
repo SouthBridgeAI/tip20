@@ -1,0 +1,62 @@
+# Mandark Architecture
+
+direction: right
+
+User_Interface: {
+  CLI: Command Line Interface
+  CLI -> App
+}
+
+Core_Components: {
+  App: src/app.ts
+  FileProcessor: src/process-files.ts
+  AIEditor: AI Edit Generator
+  EditVerifier: src/verify-edits.ts
+  EditProcessor: src/edit-processor.ts
+
+  App -> FileProcessor: Process Files
+  App -> AIEditor: Get AI Edits
+  App -> EditVerifier: Verify Edits
+  App -> EditProcessor: Process Edits
+}
+
+AI_Services: {
+  AnthropicAPI: src/call-ai-claude.ts
+  OpenAIAPI: src/call-ai-gpt.ts
+  FireworksAPI: src/call-fireworks.ts
+
+  AIEditor -> AnthropicAPI: Claude
+  AIEditor -> OpenAIAPI: GPT
+  AIEditor -> FireworksAPI: Fireworks
+}
+
+Utilities: {
+  APIKeyUtils: src/apiKeyUtils.ts
+  Models: src/models.ts
+  Types: src/types.ts
+  Prompts: src/prompt.ts
+}
+
+File_Management: {
+  FileSystem: File System
+  EditHistory: src/edit-history.ts
+
+  FileProcessor -> FileSystem: Read/Write
+  EditProcessor -> FileSystem: Update
+  EditHistory -> FileSystem: Save/Revert
+}
+
+# Connections
+App -> APIKeyUtils: Use
+App -> Models: Select
+AIEditor -> Types: Use
+AIEditor -> Prompts: Use
+EditVerifier -> Types: Use
+EditProcessor -> EditHistory: Use
+
+# Styling
+User_Interface.style.fill: "#f9f"
+Core_Components.style.fill: "#bbf"
+AI_Services.style.fill: "#bfb"
+Utilities.style.fill: "#fbb"
+File_Management.style.fill: "#ffb"

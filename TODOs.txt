@@ -1,0 +1,2 @@
+1. Add an option to fail silently
+2. Check type reflection when imported as package

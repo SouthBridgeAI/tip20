@@ -1,0 +1,20 @@
+To remove leading whitespace from a string in Node.js with TypeScript, you can use the `trimStart()` method. Here's a simple example:
+
+```typescript
+const stringWithLeadingWhitespace: string = "   Hello, world!";
+const trimmedString: string = stringWithLeadingWhitespace.trimStart();
+
+console.log(trimmedString); // Output: "Hello, world!"
+```
+
+The `trimStart()` method removes whitespace from the beginning of a string, including spaces, tabs, and line breaks. It returns a new string without modifying the original.
+
+Alternatively, you can use the `trimLeft()` method, which is an alias for `trimStart()`:
+
+```typescript
+const trimmedString: string = stringWithLeadingWhitespace.trimLeft();
+```
+
+Both methods work the same way and are supported in modern versions of Node.js and TypeScript.
+
+Would you like me to explain more about string manipulation in TypeScript or show you how to use this in a larger context?
