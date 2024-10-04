@@ -1,6 +1,6 @@
 {
   "name": "tip20",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Hrishi Olickel <twitter-@hrishioa> (https://olickel.com)",
   "description": "Use prefix completion to extract specific data with streaming",
   "repository": {
@@ -14,7 +14,7 @@
     "@anthropic-ai/tokenizer": "^0.0.4"
   },
   "scripts": {
-    "build": "tsup ./src"
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --declarationDir dist && mv dist/index.d.ts dist/index.d.mts && cp dist/index.d.mts dist/index.d.cts"
   },
   "files": [
     "dist",
@@ -22,14 +22,19 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "devDependencies": {
     "@swc/core": "^1.7.26",
     "@types/bun": "^1.1.10",
