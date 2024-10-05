@@ -12,7 +12,7 @@ npm install tip20
 
 [Bun](https://bun.sh/) is still the preferred runtime (`bun install tip20`).
 
-tip20 includes both a streaming and a regular async function for output. 
+tip20 includes both a streaming and a regular async function for output.
 
 ```typescript
 import fs from "fs";
@@ -37,7 +37,6 @@ Tip20 is named after the (half serious) joke that tipping LLMs results in better
 
 [from @voooooogel
 ](https://x.com/voooooogel/status/1730726744314069190)
-
 
 ## Contributing
 
