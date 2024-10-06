@@ -14,6 +14,8 @@ npm install tip20
 
 tip20 includes both a streaming and a regular async function for output.
 
+`shortCircuit` is a boolean that will stop the streaming once enough is found in the response. This should reduce response times by about 90%.
+
 ```typescript
 import fs from "fs";
 import { tip20streaming } from "tip20";
@@ -21,7 +23,8 @@ import { tip20streaming } from "tip20";
 const tip20stream = await tip20streaming(
   "typescript",
   "Some mixed response",
-  "claude-3-haiku-20240307"
+  "claude-3-haiku-20240307",
+  true // short ciruit.
 );
 
 for await (const token of tip20stream) {

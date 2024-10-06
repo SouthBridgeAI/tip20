@@ -1,6 +1,6 @@
 {
   "name": "tip20",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Hrishi Olickel <twitter-@hrishioa> (https://olickel.com)",
   "description": "Use prefix completion to extract specific data with streaming",
   "repository": {

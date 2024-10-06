@@ -22,9 +22,16 @@ export async function tip20(
   outputType: string,
   inputData: string,
   modelName: (typeof tip20Models)[number]["name"],
+  shortCircuit?: boolean,
   key?: string // or use env var
 ) {
-  const tip20stream = tip20streaming(outputType, inputData, modelName, key);
+  const tip20stream = tip20streaming(
+    outputType,
+    inputData,
+    modelName,
+    shortCircuit,
+    key
+  );
 
   for await (const token of tip20stream) {
     if (token.type === "error") {
@@ -36,10 +43,17 @@ export async function tip20(
   }
 }
 
+export function countOccurrences(str, substr) {
+  const regex = new RegExp(substr, "g");
+  const matches = str.match(regex);
+  return matches ? matches.length : 0;
+}
+
 export async function* tip20streaming(
   outputType: string,
   inputData: string,
   modelName: (typeof tip20Models)[number]["name"],
+  shortCircuit?: boolean,
   key?: string // or use env var
 ): AsyncGenerator<Tip20TokenPacket, void, undefined> {
   try {
@@ -97,6 +111,32 @@ export async function* tip20streaming(
 
         partialToken += token;
         fullMessage += token;
+
+        if (
+          shortCircuit &&
+          inputData.includes("```") &&
+          inputData.includes(fullMessage) &&
+          countOccurrences(inputData, fullMessage) === 1
+        ) {
+          const restOfResponse = inputData
+            .substring(inputData.indexOf(fullMessage) + fullMessage.length)
+            .split("```")[0]
+            .trimEnd();
+
+          yield {
+            type: "token",
+            token: partialToken,
+          };
+
+          fullMessage += restOfResponse;
+
+          yield {
+            type: "fullMessage",
+            message: fullMessage,
+          };
+
+          return;
+        }
 
         if (fullMessage.includes("```")) {
           yield {
